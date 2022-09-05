@@ -135,4 +135,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: -8142545736675059126}
-  goal: {fileID: 0}

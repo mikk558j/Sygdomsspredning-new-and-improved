@@ -10,12 +10,12 @@ public class Spawner : MonoBehaviour
 {
     public GameObject prefab;
 
-    public int xmax;
-    public int zmax;
-    public int xmin;
-    public int zmin;
-    public int x;
-    public int z; 
+    public float xmax;
+    public float zmax;
+    public float xmin;
+    public float zmin;
+    public float x;
+    public float z; 
 
     // Start is called before the first frame update
     void Start()
