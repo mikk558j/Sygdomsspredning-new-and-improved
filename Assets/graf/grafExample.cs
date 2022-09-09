@@ -7,6 +7,10 @@ public class grafExample : MonoBehaviour
     graf testIt;
     string GrafId1, GrafId2, GrafId3;
     int cnt;
+    public float antalsusceptivle;
+    public float antalinfected;
+    public float antalrecovered;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +24,9 @@ public class grafExample : MonoBehaviour
 
     void updateGrafInvoke()
     {
-        testIt.AddData(GrafId1, new Vector2(cnt, -0.25f * cnt*cnt));
-        testIt.AddData(GrafId2, new Vector2(cnt, 0.50f * cnt * cnt));
-        testIt.AddData(GrafId3, new Vector2(cnt, Random.Range(5,10)));
+        testIt.AddData(GrafId1, new Vector2(cnt, antalsusceptivle));
+        testIt.AddData(GrafId2, new Vector2(cnt, antalinfected));
+        testIt.AddData(GrafId3, new Vector2(cnt, antalrecovered));
         cnt++;
         testIt.updateGraf();
     }
