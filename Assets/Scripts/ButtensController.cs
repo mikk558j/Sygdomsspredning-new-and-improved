@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class ButtensController : MonoBehaviour
 {
+    public bool masksState;
+    public bool vaccineState;
+    public bool quarantineState;
+    public bool curfewState;
     // Start is called before the first frame update
     void Start()
     {
-        
+        masksState = false;
+        vaccineState = false;
+        quarantineState = false;
+        curfewState = false;
     }
 
     // Update is called once per frame
@@ -20,24 +27,51 @@ public class ButtensController : MonoBehaviour
 
     public void masks()
     {
-        print("Masks");
-
+        if(masksState==true)
+        {
+            masksState = false;
+            print(masksState);
+        }
+        else
+        {
+            masksState = true;
+            print(masksState);
+        }
     }
 
     public void vaccine()
     {
-        print("Vaccine");
-
+        if(vaccineState==true)
+        {
+            vaccineState = false;
+        }
+        else
+        {
+            vaccineState = true;
+        }
     }
 
     public void quarantine()
     {
-        print("Quarantine");
-
+        if(quarantineState==true)
+        {
+            quarantineState = false;
+        }
+        else
+        {
+            quarantineState = true;
+        }
     }
 
     public void curfew()
     {
-        print("Curfew");
+        if(curfewState==true)
+        {
+            curfewState = false;
+        }
+        else
+        {
+            curfewState = true;
+        }
     }
 }

@@ -7,7 +7,11 @@ using UnityEngine;
 public class TidsStyre : MonoBehaviour
 {
     Vector3 skyRotation = new Vector3();
-    public float time;
+    public float hour; 
+    private float timeState;
+    private float time;
+    public float lengthOfDayInMin;
+    
     // Start is called before the first frame update
     void Start()
     {
