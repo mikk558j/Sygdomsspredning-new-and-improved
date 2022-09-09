@@ -6,7 +6,15 @@ using UnityEngine.AI;
 public class Agent : MonoBehaviour
 {
     public NavMeshAgent agent;
-    GameObject goal; 
+    GameObject goal;
+    public enum sygdomstilstand
+    {
+        susceptivle,
+        infected,
+        recovered,
+    }
+
+    public sygdomstilstand minsygdomstilstand = new sygdomstilstand();
 
     // Start is called before the first frame update
     void Start()
