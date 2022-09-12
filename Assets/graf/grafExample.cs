@@ -7,9 +7,10 @@ public class grafExample : MonoBehaviour
     graf testIt;
     string GrafId1, GrafId2, GrafId3;
     int cnt;
-    public float antalsusceptivle;
-    public float antalinfected;
-    public float antalrecovered;
+    public int antalsusceptivle;
+    public int antalinfected;
+    public int antalrecovered;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,8 @@ public class grafExample : MonoBehaviour
 
     void updateGrafInvoke()
     {
+        CountDiseaseStages();
+        // Kalder "CountDiseaseStages" metoden 
         testIt.AddData(GrafId1, new Vector2(cnt, antalsusceptivle));
         testIt.AddData(GrafId2, new Vector2(cnt, antalinfected));
         testIt.AddData(GrafId3, new Vector2(cnt, antalrecovered));
@@ -45,6 +48,32 @@ public class grafExample : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    void CountDiseaseStages()
+    {
+        // Sætter de tre variabler til 0 så at de bliver talt op hver gang vi kører vores foreach loop
+        antalinfected = 0;
+        antalrecovered = 0;
+        antalsusceptivle = 0; 
         
+        // Vi finder alle NPCer med NPC tagget og vi putter dem i et array så vi kan få fat i deres components og tælle dem. 
+        GameObject[] NpcList = GameObject.FindGameObjectsWithTag("NPC");
+        foreach (GameObject NPC in NpcList)
+        {
+            if(NPC.GetComponent<Agent>().minsygdomstilstand == Agent.sygdomstilstand.susceptivle)
+            {
+                antalsusceptivle++;
+            }
+            if (NPC.GetComponent<Agent>().minsygdomstilstand == Agent.sygdomstilstand.infected)
+            {
+                antalinfected++;
+            }
+            if (NPC.GetComponent<Agent>().minsygdomstilstand == Agent.sygdomstilstand.recovered)
+            {
+                antalrecovered++;
+            }
+        }
     }
 }
