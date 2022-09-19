@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5180834001271322579}
   m_Layer: 0
   m_Name: Agent
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,4 +135,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: -8142545736675059126}
-  goal: {fileID: 0}
+  minsygdomstilstand: 0
