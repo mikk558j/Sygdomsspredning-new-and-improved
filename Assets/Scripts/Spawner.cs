@@ -3,28 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// Instantiates 10 copies of Prefab each 2 units apart from each other
-
-
 public class Spawner : MonoBehaviour
 {
     public GameObject prefab;
+    public GameObject[] allHomes;
 
-    public int xmax;
-    public int zmax;
-    public int xmin;
-    public int zmin;
-    public int x;
-    public int z; 
+    public int houseNr;
+    public int populationSize;
 
     // Start is called before the first frame update
     void Start()
     {
-        for (var i = 0; i < 20; i++)
+        //Leder efter gameobjects som er makeret med tag "Home"
+        allHomes = GameObject.FindGameObjectsWithTag("Home");
+
+        //Spawner NPC'er optil og med populationSize 
+        for (var i = 0; i < populationSize; i++)
         {
-            x = Random.Range(xmin, xmax);
-            z = Random.Range(zmin, zmax); 
-            Instantiate(prefab, new Vector3(x, 0, z), Quaternion.identity);
+            //Definere hvilket husnummer NPC'en skal spawne i
+            houseNr = Random.Range(0, allHomes.Length);
+            
+            //Spawner en NPC i dets hus
+            GameObject agent =  Instantiate(prefab, allHomes[houseNr].transform.position + new Vector3(Random.Range(0f,2f),0,Random.Range(0f,2f)), Quaternion.identity);
+
+            //Giver husnummeret videre til "TilstandsmaskinePlacering"'s scriptet
+            agent.GetComponent<TilstandsmaskinePlacering>().houseNr = houseNr;
         }
     }
         
