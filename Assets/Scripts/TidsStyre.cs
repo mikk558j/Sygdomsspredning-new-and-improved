@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class TidsStyre : MonoBehaviour
 {
-    Vector3 skyRotation = new Vector3();
+    public Vector3 skyRotation = new Vector3();
     private float timeState;
-    private float time;
+    public float time;
     public float lengthOfDayInMin;
     private float runTime;
     public int daysPast;

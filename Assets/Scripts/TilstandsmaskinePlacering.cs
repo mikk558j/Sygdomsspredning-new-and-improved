@@ -9,20 +9,20 @@ using UnityEngine.AI;
 public class TilstandsmaskinePlacering : MonoBehaviour
 {
     public NavMeshAgent agent;
-    public ButtensController knapStates;
+    //public ButtensController knapStates;
     public TidsStyre timeState;
     
     public enum stagesOfDisease
     {
         susceptible, ill, sick, hospitalized, immune
     }
-    stagesOfDisease stageOfSisease = new stagesOfDisease();
+    public stagesOfDisease stageOfDisease = new stagesOfDisease();
 
     public enum placeToBe
     {
         home, school, work, free, hospital, hospitalized
     }
-    placeToBe placeToGo = new placeToBe();
+    public placeToBe placeToGo = new placeToBe();
 
     public GameObject[] allHomes;
     public GameObject currentHouse;
@@ -49,11 +49,12 @@ public class TilstandsmaskinePlacering : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        knapStates = GameObject.Find("GameController").GetComponent<ButtensController>();
+        //knapStates = GameObject.Find("GameController").GetComponent<ButtensController>();
         timeState = GameObject.Find("Directional Light").GetComponent<TidsStyre>();
         allHomes = GameObject.FindGameObjectsWithTag("Home");
         allSchools = GameObject.FindGameObjectsWithTag("School");
         allWork = GameObject.FindGameObjectsWithTag("Work");
+        allFree = GameObject.FindGameObjectsWithTag("Free");
         allNpc = GameObject.FindGameObjectsWithTag("Npc");
 
         schoolNr = Random.Range(0, allSchools.Length);
@@ -79,6 +80,12 @@ public class TilstandsmaskinePlacering : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        agent.speed = 50f / timeState.lengthOfDayInMin;
+        agent.angularSpeed = 500f / timeState.lengthOfDayInMin;
+        agent.acceleration = 1000f / timeState.lengthOfDayInMin;
+
+        time = timeState.skyRotation.x;
 
         //Her skal jeg skrive noget kode som beskriver hvordan deres alder ændre sig
         age = ageStart + timeState.daysPast - ageOfBirth;
@@ -137,13 +144,13 @@ public class TilstandsmaskinePlacering : MonoBehaviour
 
     private void goHome()
     {
-        if(time>120&&age<10)
+        if(time>30&&time<120&&age<10)
         {
             placeToGo = placeToBe.school;
-        }else if(time>120&&age>10&&age<30)
+        }else if(time>30&&time<150&&age>10&&age<30)
         {
             placeToGo = placeToBe.work;
-        }else if(time>150&&age>30)
+        }else if(time>60&&time<165&&age>30)
         {
             placeToGo = placeToBe.free;
         }else
@@ -154,7 +161,7 @@ public class TilstandsmaskinePlacering : MonoBehaviour
 
     private void goSchool()
     {
-        if (time > 210)
+        if (time > 120)
         {
             placeToGo = placeToBe.free;
         }
@@ -166,7 +173,7 @@ public class TilstandsmaskinePlacering : MonoBehaviour
 
     private void goWork()
     {
-        if (time>240)
+        if (time>150)
         {
             placeToGo = placeToBe.free;
         }else
@@ -177,18 +184,19 @@ public class TilstandsmaskinePlacering : MonoBehaviour
 
     private void goFree()
     {
-        if (time>270)
+        if (time>165)
         {
             placeToGo = placeToBe.home;
             foundFree = false;
-        }else
-        if (foundFree == false)
+        }
+        else if (foundFree == false)
         {
             freeNr = Random.Range(0, allFree.Length);
             currentFree = allFree[freeNr];
             foundFree = true;
-        }else
-        if (foundFree == true)
+
+        }
+        else if (foundFree == true)
         {
             agent.SetDestination(currentFree.transform.position);
         }
@@ -200,6 +208,7 @@ public class TilstandsmaskinePlacering : MonoBehaviour
 
         ageStart = 0;
         ageOfBirth = timeState.daysPast;
+        ageOfDeath = 20 + Random.Range(0, 20);
 
         schoolNr = Random.Range(0, allSchools.Length);
         workNr = Random.Range(0, allWork.Length);

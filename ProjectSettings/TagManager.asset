@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Home
   - Npc
+  - NPC
+  - Work
+  - School
+  - Hospital
+  - Free
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
 
     public int houseNr;
     public int populationSize;
+    public float percentOfPopulationSick;
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +26,17 @@ public class Spawner : MonoBehaviour
             
             //Spawner en NPC i dets hus
             GameObject agent =  Instantiate(prefab, allHomes[houseNr].transform.position + new Vector3(Random.Range(0f,2f),0,Random.Range(0f,2f)), Quaternion.identity);
-
+            
             //Giver husnummeret videre til "TilstandsmaskinePlacering"'s scriptet
             agent.GetComponent<TilstandsmaskinePlacering>().houseNr = houseNr;
+            
+            if (((i/populationSize)*100)<percentOfPopulationSick)
+            {
+                agent.GetComponent<TilstandsmaskinePlacering>().stageOfDisease = TilstandsmaskinePlacering.stagesOfDisease.ill;
+            }else
+            {
+                agent.GetComponent<TilstandsmaskinePlacering>().stageOfDisease = TilstandsmaskinePlacering.stagesOfDisease.susceptible;
+            }
         }
     }
-        
 }
