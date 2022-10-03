@@ -11,6 +11,7 @@ TagManager:
   - School
   - Hospital
   - Free
+  - House
   layers:
   - Default
   - TransparentFX

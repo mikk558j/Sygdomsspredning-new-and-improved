@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class TilstandsmaskinePlacering : MonoBehaviour
 {
     public NavMeshAgent agent;
-    //public ButtensController knapStates;
+    public ButtensController knapStates;
     public TidsStyre timeState;
     
     public enum stagesOfDisease
@@ -33,6 +33,7 @@ public class TilstandsmaskinePlacering : MonoBehaviour
     public GameObject[] allFree;
     public GameObject currentFree;
     public GameObject[] allNpc;
+    //public GameObject[] allHospitals;
 
     public int houseNr;
     public int schoolNr;
@@ -56,6 +57,7 @@ public class TilstandsmaskinePlacering : MonoBehaviour
         allWork = GameObject.FindGameObjectsWithTag("Work");
         allFree = GameObject.FindGameObjectsWithTag("Free");
         allNpc = GameObject.FindGameObjectsWithTag("Npc");
+        //allHospitals = GameObject.FindGameObjectsWithTag("Hospital");
 
         schoolNr = Random.Range(0, allSchools.Length);
         workNr = Random.Range(0, allWork.Length);
@@ -72,8 +74,6 @@ public class TilstandsmaskinePlacering : MonoBehaviour
         ageOfDeath = 20 + Random.Range(0, 20);
         ageOfBirth = 0 ;
 
-
-
         foundFree = false;
     }
 
@@ -81,22 +81,18 @@ public class TilstandsmaskinePlacering : MonoBehaviour
     void Update()
     {
 
-        agent.speed = 50f / timeState.lengthOfDayInMin;
-        agent.angularSpeed = 500f / timeState.lengthOfDayInMin;
-        agent.acceleration = 1000f / timeState.lengthOfDayInMin;
+        agent.speed = 5f / timeState.lengthOfDayInMin;
+        agent.angularSpeed = 50f / timeState.lengthOfDayInMin;
+        agent.acceleration = 100f / timeState.lengthOfDayInMin;
 
         time = timeState.skyRotation.x;
 
-        //Her skal jeg skrive noget kode som beskriver hvordan deres alder ændre sig
+        //Her bestemmes hvordan NPC'ens alder ændre sig
         age = ageStart + timeState.daysPast - ageOfBirth;
         if (age>ageOfDeath)
         {
             death();
         }
-
-        //Her skal der styres med hvordan sygdommen går
-
-
 
         //Her skiftes mellem hvilket sted NPC'en skal gå til (langt fra done)
         switch (placeToGo)

@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
             
             //Spawner en NPC i dets hus
             GameObject agent =  Instantiate(prefab, allHomes[houseNr].transform.position + new Vector3(Random.Range(0f,2f),0,Random.Range(0f,2f)), Quaternion.identity);
-            
+            agent.name = "Finn";
             //Giver husnummeret videre til "TilstandsmaskinePlacering"'s scriptet
             agent.GetComponent<TilstandsmaskinePlacering>().houseNr = houseNr;
             
