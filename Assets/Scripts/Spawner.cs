@@ -30,6 +30,7 @@ public class Spawner : MonoBehaviour
             //Giver husnummeret videre til "TilstandsmaskinePlacering"'s scriptet
             agent.GetComponent<TilstandsmaskinePlacering>().houseNr = houseNr;
             
+            //Følgende er et fossil af tidlig planlægning af implimenteringen af smidte
             if (((i/populationSize)*100)<percentOfPopulationSick)
             {
                 agent.GetComponent<TilstandsmaskinePlacering>().stageOfDisease = TilstandsmaskinePlacering.stagesOfDisease.ill;

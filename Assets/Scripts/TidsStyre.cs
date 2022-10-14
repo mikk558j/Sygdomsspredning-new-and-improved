@@ -7,10 +7,8 @@ using UnityEngine;
 public class TidsStyre : MonoBehaviour
 {
     public Vector3 skyRotation = new Vector3();
-    private float timeState;
     public float time;
     public float lengthOfDayInMin;
-    private float runTime;
     public int daysPast;
 
     // Start is called before the first frame update
@@ -22,11 +20,6 @@ public class TidsStyre : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        runTime = runTime + Time.deltaTime;
-
-        //print(runTime);
-
         time = time + Time.deltaTime;
         
         skyRotation = new Vector3(-20+(time*(220/(lengthOfDayInMin*60))), 0, 0);
